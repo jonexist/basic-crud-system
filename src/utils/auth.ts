@@ -1,4 +1,4 @@
-import { RegistrationFormData } from "@/components/auth/schema"
+import { RegistrationFormData } from "./schema"
 
 export const registerUser = async (data: RegistrationFormData) => {
   const { firstName, middleName, lastName, username, password } = data
