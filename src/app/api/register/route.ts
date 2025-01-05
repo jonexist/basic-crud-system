@@ -1,5 +1,5 @@
-import { registrationSchema } from "@/components/auth/schema"
 import db from "@/lib/db"
+import { registrationSchema } from "@/utils/schema"
 import * as bcrypt from "bcrypt"
 import { NextResponse } from "next/server"
 
