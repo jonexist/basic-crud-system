@@ -1,10 +1,12 @@
 "use client"
 
 import { authenticate } from "@/lib/action"
+import { LoginFormData, loginSchema } from "@/utils/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import z from "zod"
+import ErrorCard from "../core/error-card"
 import { Button } from "../ui/button"
 import {
   Card,
@@ -23,8 +25,6 @@ import {
   FormMessage,
 } from "../ui/form"
 import { Input } from "../ui/input"
-import ErrorCard from "./error-card"
-import { loginSchema, type LoginFormData } from "./schema"
 
 const LoginForm = () => {
   const [serverError, setServerError] = useState<string>("")
@@ -60,7 +60,9 @@ const LoginForm = () => {
   return (
     <Card className="w-full sm:w-[27rem]">
       <CardHeader>
-        <CardTitle className="text-center text-xl">Admin Portal</CardTitle>
+        <CardTitle className="text-center text-xl">
+          Welcome to Postbook
+        </CardTitle>
         <CardDescription className="text-center">
           Enter your credentials to access your account
         </CardDescription>

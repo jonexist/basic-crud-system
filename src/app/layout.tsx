@@ -1,17 +1,15 @@
+import AuthProvider from "@/components/provider/auth-provider"
 import { QueryProvider } from "@/components/provider/query-provider"
+import ThemeProvider from "@/components/provider/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
+import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
-import localFont from "next/font/local"
+import { Outfit } from "next/font/google"
 import "./globals.css"
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-})
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const outfit = Outfit({
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
 })
 
 export const metadata: Metadata = {
@@ -25,11 +23,21 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <QueryProvider>{children}</QueryProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn("antialiased", outfit.className)}>
+        <Toaster />
+        <AuthProvider>
+          <QueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="white"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </QueryProvider>
+        </AuthProvider>
       </body>
     </html>
   )

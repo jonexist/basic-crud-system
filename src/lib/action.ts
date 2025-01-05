@@ -6,7 +6,7 @@ import { AuthError } from "next-auth"
 import { unstable_noStore as noStore } from "next/cache"
 import { redirect } from "next/navigation"
 import { z } from "zod"
-import { signIn, signOut } from "../../auth"
+import { auth, signIn, signOut } from "../../auth"
 import db from "./db"
 
 const handleAuthError = (error: AuthError) => {
@@ -47,5 +47,50 @@ export const getUser = async (username: string): Promise<User | undefined> => {
     return user || undefined
   } catch (error) {
     throw new Error("Failed to fetch user: " + error)
+  }
+}
+
+// The `getUserSession` function is used to fetch the current user session.
+export const getUserSession = async () => {
+  noStore()
+  try {
+    const session = await auth()
+    return session?.user
+  } catch (error) {
+    throw new Error("Failed to fetch user: " + error)
+  }
+}
+
+// The `getCurrentUser` function is used to fetch the current user.
+export const getCurrentUser = async () => {
+  noStore()
+  try {
+    const session = await getUserSession()
+    const currentUser = await db.user.findUnique({
+      where: { username: session?.username || "" },
+    })
+    return currentUser
+  } catch (error) {
+    throw new Error("Failed to fetch user: " + error)
+  }
+}
+
+export const updatelikes = async (postId: string, mode: "like" | "dislike") => {
+  try {
+    const incrementValue = mode === "like" ? 1 : -1
+
+    const post = await db.post.update({
+      where: { id: postId },
+      data: {
+        likes: {
+          increment: incrementValue,
+        },
+      },
+    })
+
+    return post
+  } catch (error) {
+    console.error("Request error", error)
+    throw new Error("Error liking posts")
   }
 }

@@ -20,13 +20,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
 import { registerUser } from "@/utils/auth"
+import { RegistrationFormData, registrationSchema } from "@/utils/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { Eye, EyeOff } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { RegistrationFormData, registrationSchema } from "./schema"
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false)
