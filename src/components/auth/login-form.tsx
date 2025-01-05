@@ -3,6 +3,7 @@
 import { authenticate } from "@/lib/action"
 import { LoginFormData, loginSchema } from "@/utils/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import z from "zod"
@@ -54,8 +55,6 @@ const LoginForm = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, password])
-
-  const getFullYear = () => new Date().getFullYear()
 
   return (
     <Card className="w-full sm:w-[27rem]">
@@ -122,8 +121,14 @@ const LoginForm = () => {
         </Form>
       </CardContent>
       <CardFooter className="grid place-items-center">
-        <CardDescription>
-          {getFullYear()} &copy; All rights reserved
+        <CardDescription className="py-2 tracking-wide">
+          Don&apos;t have an account?{" "}
+          <Link
+            href="/auth/register"
+            className="text-foreground font-medium underline"
+          >
+            Register
+          </Link>
         </CardDescription>
       </CardFooter>
     </Card>
