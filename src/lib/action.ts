@@ -1,6 +1,6 @@
 "use server"
 
-import { loginSchema } from "@/components/auth/schema"
+import { loginSchema } from "@/utils/schema"
 import { User } from "@prisma/client"
 import { AuthError } from "next-auth"
 import { unstable_noStore as noStore } from "next/cache"
