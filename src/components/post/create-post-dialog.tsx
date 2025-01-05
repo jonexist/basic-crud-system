@@ -24,7 +24,7 @@ import { useToast } from "@/hooks/use-toast"
 import { createPost } from "@/utils/post"
 import { CreatePostSchema, PostFormData, RefetchType } from "@/utils/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation, UseQueryResult } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 

@@ -17,7 +17,7 @@ import {
   RefetchType,
 } from "@/utils/schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation, UseQueryResult } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 
 type CommentFormType = {
