@@ -30,7 +30,11 @@ export async function GET() {
         createdAt: "desc",
       },
     })
-    return NextResponse.json(posts)
+    return NextResponse.json(posts, {
+      headers: {
+        "Cache-Control": "no-store",
+      },
+    })
   } catch (error) {
     console.error("Request error", error)
     return NextResponse.json({ error: "Error fetching posts" }, { status: 500 })
