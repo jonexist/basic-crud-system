@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { logout } from "@/lib/action"
+import { cn, quicksand } from "@/lib/utils"
 import { FileText, LogOut } from "lucide-react"
 import Link from "next/link"
 import React from "react"
@@ -17,14 +18,21 @@ import { auth } from "../../../auth"
 const NavigationBar = async () => {
   const session = await auth()
   return (
-    <header className="top-0 z-40 w-full border-b bg-slate-300 flex justify-center">
+    <header className="top-0 z-40 w-full border-b flex justify-center">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <div className="flex gap-6 md:gap-10">
           <Link
             href="/member/dashboard"
             className="flex items-center space-x-2"
           >
-            <span className="inline-block font-bold text-xl">Postbook</span>
+            <span
+              className={cn(
+                "inline-block font-bold text-xl",
+                quicksand.className
+              )}
+            >
+              Postbook
+            </span>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">

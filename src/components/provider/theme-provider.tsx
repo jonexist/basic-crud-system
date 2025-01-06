@@ -12,7 +12,7 @@ const ThemeProvider = ({
     <NextThemesProvider {...props}>
       <ProgressBar
         height="3px"
-        color="#8c8c8c"
+        color="#3399FF"
         options={{ showSpinner: false }}
         shallowRouting
       />

@@ -35,7 +35,7 @@ const PostCard = ({ post, currentUser, refetch }: PostCardProps) => {
       <CardHeader className="flex flex-row items-center gap-4">
         <Avatar>
           <AvatarImage
-            src={`https://api.dicebear.com/6.x/initials/svg?seed=${post.user.username}`}
+            src={`https://api.dicebear.com/9.x/initials/svg?seed=${post.user.username}`}
             alt={post.user.username}
           />
           <AvatarFallback>{`${post.user.firstName.charAt(
@@ -74,13 +74,13 @@ const PostCard = ({ post, currentUser, refetch }: PostCardProps) => {
         <>
           <Separator />
           <CardContent>
-            <h4 className="mb-4 text-sm font-semibold">Comments</h4>
+            <h4 className="mb-4 text-sm font-semibold mt-3">Comments</h4>
             <ul className="space-y-4">
               {post.comments.map((comment) => (
                 <li key={comment.id} className="flex items-start gap-2">
                   <Avatar className="h-6 w-6">
                     <AvatarImage
-                      src={`https://api.dicebear.com/6.x/initials/svg?seed=${comment.user.username}`}
+                      src={`https://api.dicebear.com/9.x/initials/svg?seed=${comment.user.username}`}
                       alt={comment.user.username}
                     />
                     <AvatarFallback>{`${comment.user.firstName.charAt(
