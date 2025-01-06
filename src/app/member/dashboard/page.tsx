@@ -4,11 +4,7 @@ import AllPosts from "./_components/all-posts"
 
 const Dashboard = async () => {
   const user = await auth()
-  return (
-    <>
-      <AllPosts currentUser={user} />
-    </>
-  )
+  return <>{user && <AllPosts currentUser={user} />}</>
 }
 
 export default Dashboard
