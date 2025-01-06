@@ -1,6 +1,8 @@
 import db from "@/lib/db"
 import { NextResponse } from "next/server"
 
+export const revalidate = 0
+
 export async function GET() {
   try {
     const posts = await db.post.findMany({
@@ -32,8 +34,10 @@ export async function GET() {
     })
     return NextResponse.json(posts, {
       headers: {
-        "Cache-Control": "no-store",
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
       },
+      status: 200,
     })
   } catch (error) {
     console.error("Request error", error)
