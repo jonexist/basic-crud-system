@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import z from "zod"
 import ErrorCard from "../core/error-card"
 import { Button } from "../ui/button"
 import {
@@ -38,15 +37,18 @@ const LoginForm = () => {
     },
   })
 
-  const handleLogin = async (values: z.infer<typeof loginSchema>) => {
-    const response = await authenticate(values)
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    response ? setServerError(response) : setServerError("")
-  }
-
   const { errors, isSubmitting } = form.formState
 
-  const email = form.watch("username")
+  const handleLogin = async (values: LoginFormData) => {
+    const response = await authenticate(values)
+    if (response) {
+      setServerError(response)
+    } else {
+      setServerError("")
+    }
+  }
+
+  const username = form.watch("username")
   const password = form.watch("password")
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const LoginForm = () => {
       setServerError("")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [email, password])
+  }, [username, password])
 
   return (
     <Card className="w-full sm:w-[27rem]">
