@@ -1,9 +1,10 @@
-import { RegistrationFormData } from "./schema"
+import { RegistrationFormData, registrationSchema } from "./schema"
 
 export const registerUser = async (data: RegistrationFormData) => {
-  const { firstName, middleName, lastName, username, password } = data
+  const { firstName, middleName, lastName, username, password } =
+    registrationSchema.parse(data)
   try {
-    const res = await fetch("/api/register", {
+    const res = await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({
         firstName,
