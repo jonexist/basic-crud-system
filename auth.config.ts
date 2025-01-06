@@ -16,19 +16,28 @@ export const authConfig = {
       const isMember = path.startsWith("/member")
 
       if (isLoggedIn) {
+        // User is logged in
         if (path === "/member") {
-          // if user goes to /member or /dashboard, navigate back to member/dashboard
+          // If user tries to access /member, redirect to /member/dashboard
           return Response.redirect(new URL("/member/dashboard", nextUrl))
         }
-        if (isMember) return true
+        if (isMember) {
+          // If user is a member, allow access
+          return true
+        }
+        // If user is logged in but not a member, redirect to /member/dashboard
         return Response.redirect(new URL("/member/dashboard", nextUrl))
       } else {
+        // User is not logged in
         if (isMember) {
+          // If user is a member, redirect to login page
           return Response.redirect(new URL("/auth/login", nextUrl))
         }
         if (path === "/") {
+          // If user tries to access the home page, redirect to login page
           return Response.redirect(new URL("/auth/login", nextUrl))
         }
+        // Allow access to other paths
         return true
       }
     },
