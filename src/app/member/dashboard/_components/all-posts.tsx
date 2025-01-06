@@ -1,5 +1,7 @@
 "use client"
 
+import CardSkeleton from "@/components/core/card-skeleton"
+import EmptyState from "@/components/core/empty-state"
 import CreatePostDialog from "@/components/post/create-post-dialog"
 import PostCard from "@/components/post/post-card"
 import { getPosts } from "@/utils/post"
@@ -23,7 +25,11 @@ const AllPosts = ({ currentUser }: { currentUser: User | null }) => {
       </div>
       <div className="space-y-8">
         {isLoading ? (
-          <div>Fetching posts...</div>
+          <>
+            {Array.from({ length: 4 }).map((_, index) => (
+              <CardSkeleton key={index} />
+            ))}
+          </>
         ) : posts && posts.length > 0 ? (
           <>
             {posts.map((post) => (
@@ -36,7 +42,10 @@ const AllPosts = ({ currentUser }: { currentUser: User | null }) => {
             ))}
           </>
         ) : (
-          <div>No post for today</div>
+          <EmptyState
+            title="No posts available"
+            description="There are no posts to display at the moment. Check back later or create a new post to get started."
+          />
         )}
       </div>
     </main>
